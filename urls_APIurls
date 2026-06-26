@@ -1,0 +1,249 @@
+const getUwUrl = (): string => {
+  if (process.env.ENV === 'DEV') {
+    return 'https://app-uwbworkbenchapi-dev-eastus2-001.azurewebsites.net';
+  } else if (process.env.ENV === 'TST') {
+    return 'https://app-uwbworkbenchapi-tst-eastus2-001.azurewebsites.net';
+  } else {
+    return 'http://localhost:5093';
+  }
+};
+let uwUrl: string = getUwUrl();
+
+const getUwwbBaseUrl = (): string => {
+  if (process.env.ENV === 'DEV') {
+    return 'https://app-uwwbportal-dev-eastus2-001.azurewebsites.net';
+  } else if (process.env.ENV === 'TST') {
+    return 'https://app-uwwbportal-tst-eastus2-001.azurewebsites.net';
+  } else {
+    return 'http://localhost:4200';
+  }
+};
+let uwwb: string = getUwwbBaseUrl();
+
+const getCustBaseUrl = (): string => {
+  if (process.env.ENV === 'DEV') {
+    return 'https://app-centralservices-customers-dev-eastus2-001.azurewebsites.net';
+  } else if (process.env.ENV === 'TST') {
+    return 'https://app-centralservices-customers-tst-eastus2-001.azurewebsites.net';
+  } else {
+    return 'http://localhost:7137';
+  }
+};
+let custUrl: string = getCustBaseUrl();
+
+const getInsightBaseUrl = (): string => {
+  if (process.env.ENV === 'DEV') {
+    return 'http://usdvws018:9001/';
+  } else if (process.env.ENV === 'TST') {
+    return 'http://usdvws020:9001/';
+  } else {
+    return '';
+  }
+};
+let insightUrl: string = getInsightBaseUrl();
+
+const getBrokerID = (): string => {
+  if (process.env.ENV === 'DEV') {
+    return 'Local/Dev:HUB International';
+  } else if (process.env.ENV === 'TST') {
+    return 'Tst:HUB International';
+  } else {
+    return '';
+  }
+};
+let brokerID: string = getBrokerID();
+
+export class apiEndpoint {
+  getClearancesimulatorSubmissionEndpoint(customerID: String, productID: String, brokerID: String) {
+    return `${uwUrl}/v1/clearancesimulator/clear/${customerID}/forProduct/${productID}/forBroker/${brokerID}`;
+  }
+
+  // getClearancesimulatorSubmissionEndpointDev(customerID: String, productID: String, brokerID: String) {
+  //   return `${uwUrl}/v1/clearancesimulator/clear/${customerID}/forProduct/${productID}/forBroker/${brokerID}`;
+  // }
+}
+
+export const TEAM: string | undefined = process.env.TEAM;
+
+export const urls: { [Key: string]: string } = {
+  // Insight
+  insight: `${insightUrl}`,
+
+  //Swagger
+  UwwbSwagger: `${uwUrl}/swagger/index.html`,
+  CustomerSwagger: `${custUrl}/swagger/index.html`,
+  brokerIDSwagger: brokerID,
+
+  //uwwb application url
+  submission: `${uwwb}/inbox?tab=submissions`,
+  customAuthenticationAccount5: `${uwwb}/inbox?username=UK_UW_CYEX_USDANDO`,
+  customAuthenticationAccount6: `${uwwb}/inbox?username=UK_UW_CYEX_USDANDO2`,
+  customAuthenticationAccountNACPChriss: `${uwwb}/inbox?username=UK_UW_USPE3`,
+  customAuthenticationAccountNACPPaul: `${uwwb}/inbox?username=UK_UW_USPE2`,
+  customAuthenticationAccount1Usml: `${uwwb}/inbox?username=UK_UW_USML`,
+  customAuthenticationAccount2Usml: `${uwwb}/inbox?username=UK_UW_USML2`,
+  customAuthenticationAccount3UsmlUAOPs: `${uwwb}/inbox?username=UK_UWA_USML`,
+  customAuthenticationAccount4PropertyUAOPs: `${uwwb}/inbox?username=UK_UWA_USML2`,
+  customAuthenticationAccount8PropertyUAOPs: `${uwwb}/inbox?username=UK_UWA_CYEX_USDANDO2`,
+  customAuthenticationAccount7UAOPs: `${uwwb}/inbox?username=UK_UWA_CYEX_USDANDO`,
+  myUrl: `https://app-uwwbportal-tst-eastus2-001.azurewebsites.net/my-view`,
+  getUnassignedRisksGrid: '**/v1/risks/getUnassignedRisksGrid',
+  submissionWfView: `${uwwb}/inbox?tab=submissions&view=2`,
+  risk: `${uwwb}/inbox?tab=risks`,
+  riskWorkFlowView: `${uwwb}/inbox?tab=risks&view=2`,
+  teamInbox: `${uwwb}/teamInbox`,
+  renewals: `${uwwb}/inbox?tab=renewals`,
+  openArrow: `${uwwb}/`,
+  landingPage: `${uwwb}/home`,
+  riskOpenArrow: `${uwwb}/rating/7611f215-cfab-4354-ada9-a84dc132cd68/overview`,
+
+  swaggerTokenAPI: `https://login.microsoftonline.com/9a50eba8-7568-447a-bcb9-27a0d464aa80/oauth2/v2.0/token`,
+
+  customerOverviewAPI: '**/v1/Customer/Overview',
+  customerEsgAPI: '**/v1/Customer/esgWithProviders',
+  customerFinancialAPI: '**/v1/Customer/financialsWithProviders',
+  customerSanctionsAPI: '**/v1/customer/sanctionsummary',
+  customerHierarchyAPI: '**/v1/Customer/hierarchy',
+
+  submissonMockData: '**/v1/submissions/getSubmissionsGrid',
+  submissonWorkFlowViewMockData: '**/v1/submissions/getSubmissionsBoard',
+  riskFlowData: '**/v1/lifecycle/flowsGrid/Team/Risks',
+  getRaterPage: '**/v1/rater/getRaterPage?quoteId=ac8a4edd-11be-4bf5-a90a-5e91cab0da18',
+  riskListMockData: '**/v1/Lifecycle/flowsGrid/My/Risks',
+  riskFlowViewMockData: '**/v1/Lifecycle/flowsBoard/My/Risks',
+  teamInboxMockData: '**/v1/workItems/teamInbox/**',
+  customerOverviewMockData: '**/v1/Customer/Overview/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+  customerHierarchyMockData: '**/v1/Customer/hierarchy/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+  esgCustomerPanel: '**/v1/Customer/esg/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+  sanctionsMockData: '**/v1/Customer/sanctions/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+  customerSanctionsAddress: '**/v1/Customer/address/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+  renewalPolicyMockData: '**/v1/Lifecycle/flowsGrid/Team/RenewalProspects',
+  customerVerificationMockData:
+    '**/v1/Customer/verificationStatus/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+  customerUnexpError: '**/v1/Customer/verificationStatus/5c16fda7-2aee-e820-63cf-973ab9a9a83a',
+  customerOtherMockdata: '**/v1/Customer/financial/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+  CustomerMatchesMockData: '**/v1/Customer/manualVerification/4750b15c-0420-4a1a-85eb-d0ca8306ca5f',
+
+  //underwriting url
+  submissionGridApi: `${uwUrl}/v1/submissions/getSubmissionsGrid`,
+  userTeamOverrideApi: `${uwUrl}/v1/UserTeamOverride/`,
+  workItemsAssign_url: `${uwUrl}/v1/WorkItems/`,
+  usersApi: `${uwUrl}/v1/Users/`,
+  employeeProfilesApi: `${uwUrl}/v1/EmployeeProfiles/`,
+  renewalApi: `${uwUrl}/v1/renewalprospects/`,
+  enquiryApiId: `${uwUrl}/v1/enquiries`,
+  flowsApi: `${uwUrl}/v1/Flows/`,
+  tempEmailIngest: `${uwUrl}/v1/emailtemp/ingest`,
+
+  //underwriting domain [Customer]
+  uwCustVerificationStatus: `${uwUrl}/v1/Customer/verificationStatus/`,
+  uwCustOverview: `${uwUrl}/v1/Customer/overview/`,
+  uwCustEsg: `${uwUrl}/v1/Customer/esg/`,
+  uwCustFinancial: `${uwUrl}/v1/Customer/financial/`,
+  uwCustSanctions: `${uwUrl}/v1/Customer/sanctions/`,
+  uwCustHierarchy: `${uwUrl}/v1/Customer/hierarchy/`,
+
+  //underwriting domain [Reference Data]
+  uwRefDataCountries: ``,
+  uwRefDataSicCode: ``,
+
+  //underwriting domain [Users & Groups]
+  uwUgUsers: ``,
+  uwUgTeams: ``,
+
+  //customer domain
+  customerIdentity: `${custUrl}/api/v1/identity?customerId=`,
+  customerEsg: `${custUrl}/api/v1/esg?customerId=`,
+  customerFinancials: `${custUrl}/api/v1/financials?customerId=`,
+  customerFinancialsCapiq: `${custUrl}/api/v1/financials/standardandpoorcapiq?customerId=`,
+  customerSanctionsLexisNexis: `${custUrl}/api/v1/sanctions/lexisnexis?customerId=`,
+  customerHierarchy: `${custUrl}/api/v1/hierarchy?customerId=`,
+
+  //wait for
+  decline: '/v1/Flows/Flow.Risk',
+  assignToTeamMember: '/v1/Teams',
+  assignToSelf: '/v1/WorkItems/Flow.Risk',
+  user: '/v1/Users',
+  putOnHold: '/v1/Config/lifecyclemanager.holdreasons/flow.riskworkflow',
+  updatePutOnHold: '/v1/Config/lifecyclemanager.holdreasons/flow.riskworkflow',
+  putOnHoldBtn: '/putOnHold',
+  updateOnHold: '/updateOnHold',
+  resume: '/resume',
+};
+
+export const team: { [Key: string]: string } = {
+  //preunderwriting
+  USML_1: 'USML_Advanced_Boardroom',
+  USML_1_1: 'USML_Advanced_Boardroom_1',
+  USML_1_2: 'USML_Advanced_Boardroom_2',
+  USML_1_3: 'USML_Advanced_Boardroom_3',
+  USML_1_4: 'USML_Advanced_Boardroom_4',
+  USML_1_5: 'USML_Advanced_Boardroom_5',
+  USML_1_6: 'USML_Advanced_Boardroom_6',
+  USML_1_7: 'USML_Advanced_Boardroom_7',
+  USML_1_8: 'USML_Advanced_Boardroom_8',
+  USML_1_9: 'USML_Advanced_Boardroom_9',
+  USML_1_10: 'USML_Advanced_Boardroom_10',
+  USML_1_11: 'USML_Advanced_Boardroom_11',
+  USML_1_12: 'USML_Advanced_Boardroom_12',
+  USML_1_13: 'USML_Advanced_Boardroom_13',
+  USML_1_14: 'USML_Advanced_Boardroom_14',
+  USML_1_20: 'USML_Advanced_Boardroom_20',
+  USML_1_21: 'USML_Advanced_Boardroom_21',
+  USML_1_22: 'USML_Advanced_Boardroom_22',
+  USML_1_23: 'USML_Advanced_Boardroom_23',
+  USML_2: 'USML_Armour_Boardroom_Protection',
+  USML_2_1: 'USML_Armour_Boardroom_Protection_1',
+  USML_2_2: 'USML_Armour_Boardroom_Protection_2',
+  USML_2_3: 'USML_Armour_Boardroom_Protection_3',
+  USML_2_4: 'USML_Armour_Boardroom_Protection_4',
+  USML_3: 'USML_Execuguard',
+  USML_3_1: 'USML_Execuguard_1',
+  USML_3_2: 'USML_Execuguard_2',
+  USML_3_3: 'USML_Execuguard_3',
+  USML_3_4: 'USML_Execuguard_4',
+  USPE: 'USPE',
+  USPE_1: 'USPE_1',
+  USPE_2: 'USPE_2',
+  USPE_3: 'USPE_3',
+  USPE_4: 'USPE_4',
+  USPE_5: 'USPE_5',
+  USPE_6: 'USPE_6',
+  USPE_7: 'USPE_7',
+  USPE_8: 'USPE_8',
+  USPE_9: 'USPE_9',
+  USPE_10: 'USPE_10',
+  USPE_11: 'USPE_11',
+  London_DandO: 'LondonDandO_CyExUSDandO',
+  London_DandO_1: 'LondonDandO_CyExUSDandO_1',
+  London_DandO_2: 'LondonDandO_CyExUSDandO_2',
+  London_DandO_3: 'LondonDandO_CyExUSDandO_3',
+  London_DandO_4: 'LondonDandO_CyExUSDandO_4',
+  London_DandO_5: 'LondonDandO_CyExUSDandO_5',
+  London_DandO_6: 'LondonDandO_CyExUSDandO_6',
+  London_DandO_7: 'LondonDandO_CyExUSDandO_7',
+  London_DandO_8: 'LondonDandO_CyExUSDandO_8',
+  London_DandO_9: 'LondonDandO_CyExUSDandO_9',
+  US_Cyber: 'US_Submission_For_Cyber',
+  London_DandO_Renewal: 'LondonDandO_Renewal',
+  USML_AdvancedBoardroom_Renewal: 'USML_AdvancedBoardroom_Renewal',
+  USML_AdvancedBoardroom_Renewal_1: 'USML_AdvancedBoardroom_Renewal_1',
+  USML_ArmourBoardroom_Renewal: 'USML_ArmourBoardroom_Renewal',
+  USML_ArmourBoardroom_Renewal_1: 'USML_ArmourBoardroom_Renewal_1',
+};
+
+export const teamId: { [Key: string]: string } = {
+  USML: '3f1120d2-c024-414f-8cd1-ce37736b2658',
+  USPE: 'ef0283b6-5768-40b4-88dc-bb376562d985',
+  London_DandO: '7c3c75cb-cb4c-4464-a6bb-3d910439b1d8',
+};
+
+export const teamName: { [Key: string]: string } = {
+  USML: 'Management Liability',
+  USPE: 'Specialty Lines - US PE',
+  London_DandO: 'CyEx - US D and O',
+};
+
+export const filePath: { [Key: string]: string } = {
+  index: 'apps/uwwb-portal-e2e/shared/api/mocks/index.json',
+};
