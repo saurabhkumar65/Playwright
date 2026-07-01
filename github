@@ -1,0 +1,21 @@
+For clonning:
+
+git clone https://github.com/beazley/Beazley.Portals.Insight.Web.V2 -b uwwb-regression-merge
+
+npm install playwright
+npx playwright install
+npx nx format:check --verbose
+npx nx format:write --verbose
+
+
+for run the script:
+
+ENV : set ENV=TST
+ 
+Authentication : set WB_USER_EMAIL=saurabh.kumar@Beazley.com
+ 
+HX test user account : set WB_USER_EMAIL_HX=SVC_hx_renew_DEV@Beazley.com
+ 
+insight username : set WB_USER_NAME=KuSau
+ 
+insight crendtial : set WB_USER_CREDENTIAL=Redrocks77!
